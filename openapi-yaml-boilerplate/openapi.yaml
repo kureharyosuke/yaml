@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: "개발이 취미인 남자"
+  description: "프로젝트 설명 RestFul Api 클라이언트 UI 로컬 서버를 구동 후 요청해주세요."
+
+#내가 요청하고 싶은 서버 url 설정 다수로 설정가능
+servers:
+  - description: "유저 등록 API"
+    url: http://localhost:3000/api
+  - description: "파일 업로드 API"
+    url: http://localhost:3000
+# API 요청 경로 및 데이터 세팅
+# paths 밑에 RESTFul API Method를 선언해서 한다.
+# #paths:// Client
+  /users:
+    get:
+      summary: "유저 데이터 전체조회"
+      description: "서버에 데이터를 보내지 않고 Get방식으로 요청"
+      tags:
+        - Get 방식
+      responses:
+        '200':
+          description: 전체 유저 정보
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  users:
+                    type: object
+                    example: [{ "id": 1, "name": "유저1" },
+                              { "id": 2, "name": "유저2" },
+                              { "id": 3, "name": "유저3" }]
+
+#  // Server
+#  /**
+#    * @path {GET} http://localhost:3000/api/users
+#    * @description 요청 데이터 값이 없고 반환 값이 있는 GET Method
+#    */
+#   app.get("/api/users", (req, res) => {
+
+#       //유저 정보 반환
+#       res.json({ok: true, users: users});
+#   })
